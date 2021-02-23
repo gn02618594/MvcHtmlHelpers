@@ -1,0 +1,95 @@
+﻿@model MvcHtmlHelpers.Models.User
+
+@{
+    ViewBag.Title = "SampleHelpers";
+}
+
+<h2>SampleHelpers</h2>
+
+@Html.DisplayName("Name") : @Html.Display("Name")
+@Html.DisplayName("Nickname") : @Html.Display("Nickname")
+
+
+@Html.DisplayNameFor(m => m.Email) :@Html.DisplayFor(m => m.Email)
+@Html.DisplayNameFor(m => m.Terms) @Html.DisplayFor(m => m.Terms)
+
+@Html.DisplayText("Email")
+@Html.DisplayTextFor(m => m.Terms)
+
+<form action="" method="get">
+    @Html.Label("Name") @Html.TextBox("Name")
+    @Html.LabelFor(m => m.Email) @Html.TextBoxFor(m => m.Email)
+</form>
+@Html.Password("Password")
+@Html.PasswordFor(m => m.Password)
+
+@Html.CheckBox("Terms", false)
+@Html.CheckBoxFor(m => m.Terms, new { @checked = "checked" })
+
+Sex
+@Html.RadioButton("Sex", "Female", true)女
+@Html.RadioButton("Sex", "Male")男
+@Html.RadioButton("Sex", "Other")其他
+
+Gender
+@Html.RadioButtonFor(m => m.Gender, "女性")女
+@Html.RadioButtonFor(m => m.Gender, "男性", new { @checked = "checked" })男
+@Html.RadioButtonFor(m => m.Gender, "其他")其他
+
+@Html.DropDownList("City", new SelectList(new[] { "台北", "台中", "高雄" }))
+@{ 
+    List<SelectListItem> cityList = new List<SelectListItem>
+    { 
+    new SelectListItem{Text="基隆",Value="1"},
+    new SelectListItem{Text="宜蘭",Value="2"},
+    new SelectListItem{Text="苗栗",Value="3",Selected=true}
+    };
+}
+@Html.DropDownList("Cities",cityList)<br />
+@Html.DropDownListFor(m => m.City,cityList)
+
+@Html.ListBox("Commutemode",new SelectList(new[] { "飛機","遊艇","地鐵"}))
+@{ 
+    List<SelectListItem> CommutermodeList = new List<SelectListItem> { 
+    new SelectListItem{Text="腳踏車",Value="1",Selected=false},
+    new SelectListItem{Text="機車",Value="2",Selected=true},
+    new SelectListItem{Text="汽車",Value="3",Selected=true}
+    };
+}
+@Html.ListBoxFor(m => m.Commutermode,CommutermodeList)
+
+@Html.TextArea("Comment")
+@Html.TextAreaFor(m => m.Comment)
+
+@Html.TextArea("Comment","請輸入意見",6,80,new { @class="form-control"})
+@Html.TextAreaFor(m => m.Comment,4,40,new { @class="form-control"})
+
+@using (Html.BeginForm()) { 
+
+}
+
+@{ Html.BeginForm();}
+
+@{ Html.EndForm();}
+
+<form action="" method="post">
+    @Html.TextBox("Name")
+    @Html.ValidationMessage("Name")
+    @Html.PasswordFor(m => m.Password)
+    @Html.ValidationMessageFor(m => m.Password)
+    @Html.ValidationSummary()
+</form>
+
+@using (Html.BeginForm())
+{
+    @Html.Label("Name")
+    @Html.TextBox("Name")
+    @Html.ValidationMessage("Name")
+    <br />
+    @Html.LabelFor(m => m.Password)
+    @Html.TextBoxFor(m => m.Password)
+    @Html.ValidationMessageFor(m => m.Password)
+    <br />
+    <input type="submit" value="Sumbit" class="btn btn-primary" />
+    @Html.ValidationSummary()
+}
