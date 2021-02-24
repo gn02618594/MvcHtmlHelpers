@@ -41,5 +41,23 @@ namespace MvcHtmlHelpers.Controllers
             }
             return View(user);
         }
+        public ActionResult EditorFor() {
+            RegisterDataAnnotations register = new RegisterDataAnnotations
+            {
+                Id = 1,
+                Name = "可以的",
+                Password = "myPassword",
+                Email = "gn@gmail.com",
+                HomePage = "https://gn02618594.github.io/",
+                Gender = Gender.Male,
+                Birthday = new DateTime(1993, 6, 3),
+                Birthday2 = new DateTime(1993, 6, 3),
+                City = 4,
+                Commutermode = "1",
+                Comment = "請留下您的意見",
+                Terms = true
+            };
+            return View(register);
+        }
     }
 }
