@@ -125,6 +125,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Register.cs" />
     <Compile Include="Models\RegisterDataAnnotations.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -168,6 +169,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\HtmlHelper\SampleHelpers.cshtml" />
     <Content Include="Views\HtmlHelper\ValidationMessage.cshtml" />
+    <Content Include="Views\HtmlHelper\HelperBootstrap.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,60 @@
+﻿@using MvcHtmlHelpers.Models
+@model Register
+<!--BeginForm 方法-->
+@using (Html.BeginForm("HelpersBootstrap","HtmlHelper",FormMethod.Post,
+    new { @class = "form-horizontal", role = "form" }))
+{
+
+}
+<!--Label 方法-->
+@Html.Label("Name",new { @class="control-label",@style="color:red"})
+@Html.LabelFor(m => m.Name,new { @class="control-label",@style="color:blue"})
+
+<!--TextBox 方法-->
+@Html.TextBox("Name", null, new { @class="form-control",style="background:bisque"})
+@Html.TextBoxFor(m => m.Name,null,new { @class="form-control",style="background:lightblue"})
+
+<!--Password 方法-->
+@Html.Password("Password",null,new { @classs="form-control",style="background:lightgreen"})
+@Html.PasswordFor(m => m.Password,new { @class="form-control"})
+
+<!--checkbox 方法-->
+@Html.CheckBox("Term", true, new { title="同意否"}) 條款
+@Html.CheckBoxFor(m => m.Terms,new { disabled="disabled"}) 條款
+
+<!--RadioButton 方法-->
+@Html.RadioButton("Gender","女性",true,new { title ="選擇你的性別"}) 女生
+@Html.RadioButtonFor(m => m.Gender, "男性", new { id="Male"}) 男性
+
+<!--DropDownList 方法-->
+@Html.DropDownList("縣市",new SelectList(new[] { "台北","台中","高雄"}),new { style = "color:blue" }),
+@Html.DropDownListFor(m=>m.City,new SelectList(new[] { "彰化","雲林","嘉義"}),new { style="color:purple"})
+
+<!--Editor 方法-->
+@Html.Editor("Email", new { htmlAttributes=new {@class="form-control",@sytle="background-color:cyan"}})
+@Html.EditorFor(m => m.Email, new { htmlAttributes = new {@class="form-control",@style="background-color:lightpink"}})
+
+<!--ListBox 方法-->
+@Html.ListBox("Commutermode",new SelectList(new[] { "機車","汽車","捷運"}),new { title="通勤工具"})
+@Html.ListBoxFor(m => m.Commutermode,new SelectList(new[] { "步行","腳踏車","高鐵"}),new { title="通勤方式"})
+
+<!--TextArea 方法-->
+@Html.TextArea("Comment",new { @class="form-control",rows="4",cols="40",maxlength="255",placeholder="在這裡輸入說明"})
+@Html.TextAreaFor(m => m.Comment,new { @class="form-control",rows="4",cols="40",maxlenght="255",placeholder="在這裡輸入意見"})
+
+<!--ValidatioinMessage 方法-->
+@Html.ValidationMessage("Name","",new { @class="text-danger"})
+@Html.ValidationMessageFor(m=>m.Password,"",new { @class="text-info"})
+
+<!--ValidationSummary 方法-->
+@Html.ValidationSummary(false, "", new { @class="text-warning"})
+
+<!--ActionLink-->
+@{ var item = Model;}
+@Html.ActionLink("新增", "Create", null, new { @class="btn btn-warning"})
+@Html.ActionLink("明細", "Details", new { id=item.Id},new { @class = "btn btn-success" })
+@Html.ActionLink("編輯", "Edit", new { id = item.Id }, new { @class="btn btn-primary"})
+@Html.ActionLink("刪除", "Delete", new { id = item.Id }, new { @class="btn btn-danger"})
+
+
+

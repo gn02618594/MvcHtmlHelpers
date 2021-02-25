@@ -59,5 +59,14 @@ namespace MvcHtmlHelpers.Controllers
             };
             return View(register);
         }
+
+        public ActionResult HelperBootstrap() {
+            Register register = new Register { 
+            Id=1,
+            Name="Andy",
+            Email="gn@gmail.com"
+            };
+            return View();
+        }
     }
 }
