@@ -38,5 +38,25 @@ namespace MvcHtmlHelpers.Controllers
 
             return View(emp);
         }
+        public ActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include ="Id,Name,Mobile,Email,Department,Title")] Employee emp)
+        {
+            //用 ModelState.IsValid 判斷資料是否通過驗證
+            if (ModelState.IsValid)
+            {
+                //通過驗證，將資料異動儲存到資料庫
+                db.Employees.Add(emp);
+                db.SaveChanges();
+                //儲存完成後，導向 Index 動作方法
+                return RedirectToAction("Index");
+            }
+            //若未通過驗證，再次返回顯示 Form 表單，直到資料提交完全正確
+            return View(emp);
+        }
     }
 }
