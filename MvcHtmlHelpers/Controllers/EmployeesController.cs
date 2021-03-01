@@ -18,7 +18,7 @@ namespace MvcHtmlHelpers.Controllers
             var emps = db.Employees.ToList();
             return View(emps);
         }
-        public ActionResult Details(int Id)
+        public ActionResult Details(int? Id)
         {
             //檢查是否有員工 Id 的判斷
             if (Id == null)
@@ -57,6 +57,55 @@ namespace MvcHtmlHelpers.Controllers
             }
             //若未通過驗證，再次返回顯示 Form 表單，直到資料提交完全正確
             return View(emp);
+        }
+        public ActionResult Edit(int? Id)
+        {
+            if (Id == null)
+            {
+                return Content("查無此資料，請提供員工編號");
+            }
+            Employee emp = db.Employees.Find(Id);
+            if (emp == null)
+            {
+                return HttpNotFound();
+            }
+            return View(emp);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include ="Id,Name,Mobile,Email,Department,Title")] Employee emp) {
+            if (ModelState.IsValid)
+            {
+                db.Entry(db).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(emp);
+        }
+        public ActionResult Delete(int? Id)
+        {
+            if (Id == null)
+            {
+                return Content("查無此資料，請提供員工編號");
+            }
+            Employee emp = db.Employees.Find(Id);
+
+            if (emp == null)
+            {
+                return HttpNotFound();
+            }
+            return View(emp);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int Id) {
+            Employee emp = db.Employees.Find(Id);
+            db.Employees.Remove(emp);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+
+
         }
     }
 }
